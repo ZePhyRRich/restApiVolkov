@@ -1,0 +1,32 @@
+{% extends 'mainSite/base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<main>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5"><h1>Оформление зявки</h1></div>
+        
+          <h2>
+            Стоимость отправки = {{order.get_total_cost}}
+          </h2>
+
+          <p>Стоимость за вес: {{ order.weight }}</p>
+          {% if order_route %}
+          {% for el in order_route %}
+          <p>Стоимость за маршрут от {{ el.from_city }} до {{ el.to_city }} = {{el.price}}</p>
+          {%endfor%}
+          {%else%}
+          <p>Маршруты не назаначены</p>
+          {%endif%}
+          <a href="{% url 'my_order' %}"><button class="btn btn-primary">Принять</button></a>
+          <a href="{% url 'cancel_order' %}"><button class="btn btn-danger">Отмена</button></a>
+
+        </div>
+      </div>
+    </div>
+  
+  </main>
+{% endblock %}

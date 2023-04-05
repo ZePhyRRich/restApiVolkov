@@ -1,0 +1,52 @@
+{% extends 'mainSite/profile/base.html' %}
+
+{% block title %}Home {% endblock %}
+
+{% block content %}
+<main>
+
+  <div class="container">
+		<h1 class="my-4">История заказов <a href="{% url 'make_order' %}"><button class="btn btn-primary">+</button></a></h1> 
+		<!-- Таблица с историей заказов -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Номер заказа</th>
+					<th>Пользователь</th>
+					<th>Тип доставки</th>
+					<th>Груз</th>
+					<th>Адрес отправки</th>
+					<th>Адрес доставки</th>
+					<th>Стоимость</th>
+					<th>Время доставки</th>
+					<th>Статус</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if order %}
+				{%for el in order%}
+				<tr>
+					<td><a href="{% url 'order_route' el.id %}">{{el.id}}</a></td>
+					<td>{{el.user}} </td>
+					<td>{{el.retrive_type}}</td>
+					<td>{{el.delivery_name}}</td>
+					<td>{{el.from_city}} </td>
+					<td>{{el.to_city}}</td>
+					<td>{{el.get_total_cost}} р.</td>
+					<td>{{el.get_total_time}} д.</td>
+					<td>{{el.status}}</td>
+
+		
+				</tr>
+				{%endfor%}
+				{% else %}
+				<tr>
+					<td>Нет заказов</td>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+
+  </main>
+{% endblock %}

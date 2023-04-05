@@ -1,0 +1,86 @@
+{% extends 'mainSite/base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<main>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5"><h1>Оформление зявки</h1></div>
+      
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-sm-4">
+                <label for="firstName" class="form-label">Фамилия</label>
+                <input type="text" class="form-control" name="second_name" id="firstName" placeholder="" value="" required="">
+              </div>
+    
+              <div class="col-sm-4">
+                <label for="lastName" class="form-label">Имя</label>
+                <input type="text" class="form-control" name="name" id="lastName" placeholder="" value="" required="">
+              </div>
+
+              <div class="col-sm-4">
+                <label for="lastName" class="form-label">Отчество</label>
+                <input type="text" class="form-control" name="patronymic" id="lastName" placeholder="" value="" required="">
+
+              </div>
+
+              <div class="col-sm-4">
+                <label for="address" class="form-label">Тип отправления</label>
+                <select name="retrive_type" class="form-select" aria-label="Default select example">
+                  {% for el in type %}
+                  <option value="{{el.id}}">{{ el.name }}</option>
+                  {% endfor %}
+      
+                </select>
+              </div>
+
+              <div class="col-sm-8">
+                <label for="lastName" class="form-label">Груз</label>
+                <input  type="text" class="form-control" name="delivery_name" id="lastName" placeholder="" value="" required="">
+
+              </div>
+    
+              <div class="col-sm-4">
+                <label for="firstName" class="form-label">Вес</label>
+                <input type="number" class="form-control" name="weight" id="firstName" placeholder="" value="" required="">
+              </div>
+    
+              <div class="col-sm-4">
+                <label for="address" class="form-label">Откуда</label>
+                <select name="from_city" class="form-select" aria-label="Default select example">
+                  {% for el in city %}
+                  <option value="{{el.id}}">{{ el.name }}</option>
+                  {% endfor %}
+      
+                </select>
+              </div>
+
+              <div class="col-sm-4">
+                <label for="address" class="form-label">Куда</label>
+                <select name="to_city" class="form-select" aria-label="Default select example">
+                  {% for el in city %}
+                  <option value="{{el.id}}">{{ el.name }}</option>
+                  {% endfor %}
+      
+                </select>
+              </div>
+    
+    
+            <hr class="my-4">
+
+              <input name="status" type="hidden" value="7">
+            <button class="btn btn-primary btn-lg btn-block w-25 m-auto" type="submit">Оформить</button>
+          </form>
+
+     
+
+        </div>
+      </div>
+    </div>
+  
+  </main>
+{% endblock %}

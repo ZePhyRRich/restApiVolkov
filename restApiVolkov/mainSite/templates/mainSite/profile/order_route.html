@@ -1,0 +1,47 @@
+{% extends 'mainSite/profile/base.html' %}
+
+{% block title %}Home {% endblock %}
+
+{% block content %}
+<main>
+
+  <div class="container">
+		<h1 class="my-4">Отслеживание</h1> 
+		<!-- Таблица с историей заказов -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Номер заказа</th>
+					<th>Адрес отправления</th>
+					<th>Адрес прибытия</th>
+					<th>Статус</th>
+					<th>Цена маршрута</th>
+					<th>Время транспортировки</th>
+					<th>Транспорт</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if order_route %}
+				{%for el in order_route %}
+				<tr>
+					<td><a href="">{{el.order}}</a></td>
+					<td>{{el.from_city}} </td>
+					<td>{{el.to_city}}</td>
+					<td>{{el.route_status}}</td>
+					<td>{{el.price}}</td>
+					<td>{{el.delivery_time}} </td>
+					<td>{{el.transport}}</td>
+
+				</tr>
+				{%endfor%}
+				{% else %}
+				<tr>
+					<td>Нет заказов</td>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+
+  </main>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'mainSite/base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<main>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5"><h1>Виды отправлений</h1></div>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          {% if retrive_type %}
+            {% for rt in retrive_type %}
+          <div class="col">
+            
+            <div class="card">
+              <div class="ratio ratio-4x3">
+                <img src="{{ rt.image.url }}" class="card-img-top" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ rt.name }}</h5>
+                <p class="card-text">{{ rt.descripton }}</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'make_order' %}"><button class="btn btn-primary" name="button_type" value="{{rt.id}}">Оформить заказ</button></a>
+                {% else %}
+                <a href="{% url 'login_page' %}"><button class="btn btn-primary" name="button_type" value="{{rt.id}}">Войти</button></a> <small class="text-muted">* для оформления необходимо войти в аккаунт</small>
+                {% endif %}
+              </div>
+            </div>
+            
+          </div>
+          {% endfor %}
+          {% else %}
+            <h1>Нет доставок!</h1>
+          {% endif %}
+
+        </div>
+
+        </div>
+      </div>
+    </div>
+  
+  </main>
+{% endblock %}
